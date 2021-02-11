@@ -5,7 +5,7 @@ import Movies from './movies/movies';
 const Navigation =()=>{
     return(
         <div>
-            <ul>
+            <ul style={{margin:"0", padding:"0"}} >
                 <Route path="/" exact render = {()=><Movies/>}   />
                 <Route path="/movies" render = {()=><Movies/>}   />
                 <Route path="/places"  render ={()=> <h1>Places</h1>}   />

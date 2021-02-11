@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne&display=swap");
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html * {
+  font-family: "Syne", sans-serif !important ;
+  overscroll-behavior-y: none;
+  outline: none !important;
 }
+
+.App{
+  margin : 0;
+}
+
 
 .App-header {
   background-color: #282c34;
@@ -35,15 +41,5 @@ li a{
   text-decoration: none;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+

@@ -15,17 +15,20 @@ const MovieList = (props) =>{
                     return(
                     <div key={movie.imdbID} className='Movie-card' onClick={()=>props.getAllDetails(movie.imdbID)}>
                     {/* <button><Link to="/movieDetails">See details</Link></button> */}
-                    <img src={movie.Poster} alt="Movie Poster" />
-                     <p>{movie.Title}</p>
-                     <p>{movie.Type}</p>
-                     <p>{movie.Year}</p>
+                    <img src={movie.Poster} className="Card-movie-poster" alt="Movie Poster" />
+                    <div className="Card-movie-summary">
+                     <p className="Card-movie-title" >{movie.Title}</p>
+                     <p className="Card-movie-type" >{movie.Type}</p>
+                     <p className="Card-movie-Year" >{movie.Year}</p>
+                    </div>
+                     
                     </div>
                     )
                     })}
             </div>
         )
     }
-    else return <div><h1>initial</h1></div>
+    else return <div><h1>Search for Movie</h1></div>
 
 }
 

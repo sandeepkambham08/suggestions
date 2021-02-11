@@ -1,8 +1,13 @@
 .Movies-search-bar{
     width: 80vw;
+    margin: 0 10% 2% 10%;  
     height: 3em;
-    font-size: 1.4em;
-    border: 2px solid slategrey;
-    border-radius: 10px;
+    font-size: 1.6em;
+    border: 0.5px solid rgb(211, 209, 209);
+    box-shadow: 7px 7px 10px 5px rgb(211, 211, 211);
+    border-radius: 100px;
     outline: none;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    /* background: url(../../node_modules/bootstrap-icons/icons/search.svg) no-repeat scroll 60% 50%; */
 }
