@@ -11,9 +11,11 @@ const Movies = () =>{
     const [movieName, setMovieName] = useState(); 
     const [movieList, setMovieList] = useState();
     const [movieDetails, setMovieDetails] = useState();
+    const [showDetailsScreen, setShowDetailsScreen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalResults, setTotalResults] = useState();
     const [totalPages , setTotalPages] = useState();
+    
 
     // Check if the enter is pressed
     const checkEnter = (e) =>{
@@ -41,7 +43,7 @@ const Movies = () =>{
         const movieNameNew = document.getElementById("Movies-search-bar").value;
         console.log(movieNameNew);
         setMovieName(movieNameNew);
-        axios.get(`https://www.omdbapi.com/?&apikey=f583b536&s=${movieNameNew}&page=${currentPage}`)
+        axios.get(`https://www.omdbapi.com/?&apikey=f583b536&s=${movieNameNew}&page=${currentPage}&plot=short`)
         .then(response=>{
             console.log(response.data);
             console.log(response.data.Search);
@@ -69,7 +71,7 @@ const Movies = () =>{
         .then(response=>{
             console.log(response.data);
             setMovieDetails(response.data);
-            setShowMovieScreen(true)
+            setShowDetailsScreen(true)
         })
     }
 
@@ -97,6 +99,11 @@ const Movies = () =>{
         else{setCurrentPage(currentPage + val)}
         
     }
+
+    const changeToAllMoviesScreen = () =>{
+        setShowDetailsScreen(false)
+    }
+
     return(
         <div>
             <p>Movies</p>
@@ -105,19 +112,20 @@ const Movies = () =>{
             onKeyDown={(e)=>{checkEnter(e)}} 
             onChange = {(e)=>{betterSearch(e)}}
             />
-            <PageSelection
+            {movieList  && <PageSelection
             totalPages  =  {totalPages}
             currentPage =  {currentPage}
             changePage = {changePage}
-            />
+            />}
             {/* <button onClick={()=>{setCurrentPage(currentPage - 1 )}} >Prev</button>
             <button onClick={()=>{setCurrentPage(currentPage + 1 )}}>Next</button> */}
-            {!movieDetails && <MovieList
+            {!showDetailsScreen && <MovieList
             movieList = {movieList}
             getAllDetails = {getAllDetails}
             />}
-           {movieDetails && <MovieDetails
+           {showDetailsScreen && <MovieDetails
             movieDetails = {movieDetails}
+            changeToAllMoviesScreen = {changeToAllMoviesScreen}
             />} 
             
 </div>
