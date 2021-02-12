@@ -4,7 +4,18 @@ import './movies.css';
 import axios from 'axios';
 // import {Link} from 'react-router-dom';
 import MovieDetails from './MovieDetails/MovieDetails';
+// import WatchList from './WatchList/WatchList'
 import PageSelection from '../PageSelection/PageSelection';
+
+// PAGINATION MATERIAL UI
+import Pagination from '@material-ui/lab/Pagination';
+import WatchList from './WatchList/WatchList';
+let localStorageBuffer = localStorage.getItem('myWatchList') ? 
+JSON.parse(localStorage.getItem('myWatchList'))
+: [];
+let localStorageIds = localStorage.getItem('myWatchListIds') ? 
+JSON.parse(localStorage.getItem('myWatchListIds'))
+: [];
 
 const Movies = () =>{
     
@@ -15,6 +26,9 @@ const Movies = () =>{
     const [currentPage, setCurrentPage] = useState(1);
     const [totalResults, setTotalResults] = useState();
     const [totalPages , setTotalPages] = useState();
+    const [myWatchList , setMyWatchList] = useState([]);
+    const [recentlyAddedWatchList,setRecentlyAddedWatchList] = useState([]);
+    
     
 
     // Check if the enter is pressed
@@ -89,14 +103,15 @@ const Movies = () =>{
     // Calling a better search using debouncing 
     const betterSearch = deBouncing(getMovieDetails, 600)
 
-    const changePage = (val) =>{
+    const changePage = (e, val) =>{
+        console.log(val)
         if(val==="first"){
             setCurrentPage(1)
         }
         else if(val==="last"){
             setCurrentPage(totalPages);
         }
-        else{setCurrentPage(currentPage + val)}
+        else{setCurrentPage(val)}
         
     }
 
@@ -104,28 +119,50 @@ const Movies = () =>{
         setShowDetailsScreen(false)
     }
 
+    // Add to watch list 
+    const addToWatchList = (movieDetails) =>{
+        // console.log(movieDetails)
+        localStorageBuffer.push(movieDetails);
+        localStorageIds.push(movieDetails.imdbID);
+        console.log(localStorageBuffer);
+        // setMyWatchList([...myWatchList, movieDetails]);
+        // setRecentlyAddedWatchList([...recentlyAddedWatchList, movieDetails]);
+        localStorage.setItem('myWatchList', JSON.stringify(localStorageBuffer))
+        localStorage.setItem('myWatchListIds', JSON.stringify(localStorageIds))
+        // console.log(myWatchList)
+    }
+
     return(
         <div>
-            <p>Movies</p>
+            {!showDetailsScreen && <div>
+            {/* <p>Movies</p> */}
+            
             <input className="Movies-search-bar" id="Movies-search-bar" 
             type="text" placeholder="Search movie" 
             onKeyDown={(e)=>{checkEnter(e)}} 
             onChange = {(e)=>{betterSearch(e)}}
             />
-            {movieList  && <PageSelection
-            totalPages  =  {totalPages}
-            currentPage =  {currentPage}
-            changePage = {changePage}
-            />}
+            <div className="Center">
+            {movieList && <Pagination 
+            count={totalPages} 
+            color="secondary" 
+            page={currentPage} 
+            boundaryCount={2}
+            onChange={changePage} />
+            }
+            </div>
             {/* <button onClick={()=>{setCurrentPage(currentPage - 1 )}} >Prev</button>
             <button onClick={()=>{setCurrentPage(currentPage + 1 )}}>Next</button> */}
-            {!showDetailsScreen && <MovieList
+            <MovieList
             movieList = {movieList}
             getAllDetails = {getAllDetails}
-            />}
+            />
+            <WatchList/>
+            </div>}
            {showDetailsScreen && <MovieDetails
             movieDetails = {movieDetails}
             changeToAllMoviesScreen = {changeToAllMoviesScreen}
+            addToWatchList={addToWatchList}
             />} 
             
 </div>
