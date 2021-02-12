@@ -15,7 +15,8 @@ function App() {
       <p>Suggestions</p>
       {navigation && <div  className="Navigation-items">
       {/* <li><a href="/movies">Movies</a></li> */}
-      <li><Link to="/">Movies</Link></li>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/Movies">Movies</Link></li>
       <li><Link to="/places">Places</Link></li>
       <li><Link to="/restaurants">Restaurants</Link></li>
       <li><Link to="/others">Other suggestions</Link></li>
