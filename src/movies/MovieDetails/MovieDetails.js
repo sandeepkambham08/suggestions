@@ -53,11 +53,11 @@ const MovieDetails = (props) => {
           <p>Director : {movieDetails.Director}</p>
         </div>
       </div>
-      {localStorageIds.includes(movieDetails.imdbID) && <div className={["button", "Add-button"].join(" ")}
+      {!localStorageIds.includes(movieDetails.imdbID) && <div className={["button", "Add-button"].join(" ")}
       onClick={()=>{props.addToWatchList(movieDetails)}}>
         <span>Add to my watch list</span>{" "}
       </div>}
-      {!localStorageIds.includes(movieDetails.imdbID) && <div className={["button", "Suggest-button"].join(" ")}
+      {localStorageIds.includes(movieDetails.imdbID) && <div className={["button", "Suggest-button"].join(" ")}
       onClick={()=>{props.addToWatchList(movieDetails)}}>
         <span>Remove from watchlist</span>{" "}
       </div>}

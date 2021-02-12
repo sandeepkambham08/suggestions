@@ -1,0 +1,72 @@
+.Landing-cards{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 25vh;
+    text-align: center;
+    
+}
+.Sign-up-card{
+    /* margin-top: 30vh; */
+    margin-top: 5vh;
+    height: 25vh;
+    width: 20vw;
+    min-width: 200px;
+    /* border: 2px solid red; */
+    border-radius: 20px;
+    box-shadow: -10px -15px 15px rgba(255, 255, 255, 0.8), 10px 15px 15px rgba(0, 0, 0, 0.2);
+}
+.Sign-up-card:hover{
+    opacity: 0.4;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.Sign-up-card:active{
+    opacity: 1;
+    box-shadow: inset -10px -15px 10px rgba(255, 255, 255, 0.5), inset 10px 10px 15px rgba(0, 0, 0, 0.1);
+    /* color: #79e3b6; */
+}
+
+.Sign-up-card .header{
+    text-align: center;
+    font-size: 2em;
+    color: rgb(49, 204, 10);
+    font-weight: bold;
+}
+
+.Continue-without-card{
+    margin-top: 5vh;
+    margin-left: 5%;
+    height: 25vh;
+    width: 20vw;
+    min-width: 200px;
+    /* border: 2px solid red; */
+    border-radius: 20px;
+    box-shadow: -10px -15px 15px rgba(255, 255, 255, 0.8), 10px 15px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none !important;
+}
+
+.Continue-without-card:hover{
+    opacity: 0.4;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+
+.Continue-without-card:active{
+    opacity: 1;
+    box-shadow: inset -10px -15px 10px rgba(255, 255, 255, 0.5), inset 10px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.Continue-without-card .header{
+    text-align: center;
+    font-size: 1.4em;
+    color: rgb(13, 118, 216);
+    font-weight: bold;
+}
+
+.secondary-details p{
+    font-size: 1em;
+    color: rgb(133, 134, 136);
+}
