@@ -13,25 +13,27 @@ import WatchList from "./WatchList/WatchList";
 
 // import LandingPage from './LandingPage/LandingPage';
 
-// Firebase
-import firebase from "firebase/app";
+// // FIREBASE // 
+// import firebase from "firebase/app";
 
-import "firebase/auth";
+// import "firebase/auth";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDvsyfyDoaQAVGlFmcywg0ZWe7F1mGNuqM",
-  authDomain: "my-watchlist-59904.firebaseapp.com",
-  projectId: "my-watchlist-59904",
-  storageBucket: "my-watchlist-59904.appspot.com",
-  messagingSenderId: "1002946129845",
-  appId: "1:1002946129845:web:62c119bb9e73a7953f33fc",
-  measurementId: "G-ZV0SDRZH29",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDvsyfyDoaQAVGlFmcywg0ZWe7F1mGNuqM",
+//   authDomain: "my-watchlist-59904.firebaseapp.com",
+//   projectId: "my-watchlist-59904",
+//   storageBucket: "my-watchlist-59904.appspot.com",
+//   messagingSenderId: "1002946129845",
+//   appId: "1:1002946129845:web:62c119bb9e73a7953f33fc",
+//   measurementId: "G-ZV0SDRZH29",
+// };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.auth();
-// firebase.database();
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
+// firebase.auth();
+// // firebase.database();
+// // FIREBASE // 
+
 
 let localStorageBuffer = localStorage.getItem("myWatchList")
   ? JSON.parse(localStorage.getItem("myWatchList"))
@@ -48,6 +50,7 @@ const Movies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState();
   const [totalPages, setTotalPages] = useState();
+  const [errorMessage, setErrorMessage] = useState();
 //   const [myWatchList, setMyWatchList] = useState([]);
 //   const [recentlyAddedWatchList, setRecentlyAddedWatchList] = useState([]);
 
@@ -75,6 +78,9 @@ const Movies = () => {
     const movieNameNew = document.getElementById("Movies-search-bar").value;
     console.log(movieNameNew);
     setMovieName(movieNameNew);
+    if(movieNameNew  === ""){
+      setErrorMessage("");
+    }
     axios
       .get(
         `https://www.omdbapi.com/?&apikey=f583b536&s=${movieNameNew}&page=${currentPage}&plot=short`
@@ -85,6 +91,10 @@ const Movies = () => {
         setMovieList(response.data.Search);
         setTotalResults(response.data.totalResults);
         setTotalPages(Math.ceil(response.data.totalResults / 10));
+        if(movieNameNew  === ""){
+          setErrorMessage("");
+        }
+        else setErrorMessage(response.data.Error);
         // console.log(Math.ceil(response.data.totalResults/10))
         // document.getElementById("Movies-search-bar").value="";
         // console.log(movieName);
@@ -151,31 +161,6 @@ const Movies = () => {
     // console.log(myWatchList)
   };
 
-  // Handle Sign-in to application
-  const signIn = () => {
-    const email = document.getElementById('Sign-in-email').value;
-    const password = document.getElementById('Sign-in-password').value;
-    console.log(document.getElementById('Sign-in-email').value);
-    // console.log(document.getElementById('Sign-in-password').value)
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(userCredential.user , user)
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        // ..
-      });
-  };
-
-
-
   return (
     <div>
       {!showDetailsScreen && (
@@ -194,11 +179,7 @@ const Movies = () => {
               betterSearch(e);
             }}
           />
-          <div>
-              <input type="text" id="Sign-in-email"/>
-              <input type="password" id="Sign-in-password"/>
-              <button onClick={()=>{signIn()}} > Sign in</button>
-          </div>
+          <p className="Error-msg">{errorMessage}</p>
           <div className="Center">
             {movieList && (
               <Pagination
