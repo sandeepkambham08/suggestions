@@ -22,3 +22,9 @@
     align-items: stretch;
     margin: 0 0 1em 0;
 }
+
+.Error-msg{
+    text-align: center;
+    color: crimson;
+    font-size: 1.6em;
+}

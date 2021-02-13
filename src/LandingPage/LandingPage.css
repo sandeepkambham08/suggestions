@@ -12,6 +12,7 @@
     /* margin-top: 30vh; */
     margin-top: 5vh;
     height: 25vh;
+    
     width: 20vw;
     min-width: 200px;
     /* border: 2px solid red; */
@@ -42,6 +43,7 @@
     height: 25vh;
     width: 20vw;
     min-width: 200px;
+    min-height: max-content;
     /* border: 2px solid red; */
     border-radius: 20px;
     box-shadow: -10px -15px 15px rgba(255, 255, 255, 0.8), 10px 15px 15px rgba(0, 0, 0, 0.2);
